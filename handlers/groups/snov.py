@@ -24,3 +24,22 @@ async def start(msg: types.Message):
         await msg.reply("nomalum malumot")
 
 
+@rt.message()
+async def start(msg: types.Message):
+    if msg.group_chat_created:
+        await msg.answer("yaratildi")
+        # print(msg.group_chat_created)
+    elif msg.new_chat_members:
+        await msg.answer("keldi")
+        # print(msg.new_chat_members)
+    elif msg.left_chat_member:
+        await msg.answer("ketti")
+        # print(msg.left_chat_member)
+    elif msg.new_chat_photo:
+        await msg.answer("new rasm")
+        # rasm = msg.new_chat_photo
+        # print(rasm)
+        # await msg.answer_photo(rasm)
+    elif msg.delete_chat_photo:
+        await msg.answer("delete rasm")
+        # print(msg.delete_chat_photo)
