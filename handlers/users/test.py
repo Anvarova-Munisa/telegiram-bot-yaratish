@@ -1,5 +1,5 @@
 
-from aiogram import Router,types
+# from aiogram import Router,types
 # from aiogram.filters import Command
 # import datetime
 # import asyncio
@@ -7,7 +7,7 @@ from aiogram import Router,types
 # from datetime import timedelta
 # from aiogram import  F
 #
-router = Router()
+# router = Router()
 # @router.message(Command("test"))
 # async def test(msg:types.Message):
 #     info = msg.chat
@@ -122,18 +122,21 @@ router = Router()
 #         guruhlar.append(msg.media_group_id)
 #         await msg.answer("rasmlarni qabul qildim")
 
-@router.message()
-async def test(msg: types.Message):
-    if msg.entities:
-        await msg.delete()
-    elif msg.caption_entities:
-        await msg.delete()
+
 
 
     # if msg.caption:
     #     await msg.answer("bu caption")
 
 
+from aiogram import Router, types
+router = Router()
+@router.message()
+async def test(msg: types.Message):
+    if msg.entities:
+        await msg.delete()
+    elif msg.caption_entities:
+        await msg.delete()
 
 
 
