@@ -7,7 +7,9 @@ router = Router()
 
 @router.message(filters.Command("start",prefix="%.+/-="))
 async def test(msg: types.Message):
-    await msg.answer("Xush kelibsiz!")
+    n = "Xush kelibsiz"
+    n += " agar  yordam kerak bolsa /help tugmasini bosing"
+    await msg.answer(n)
 
 
 
