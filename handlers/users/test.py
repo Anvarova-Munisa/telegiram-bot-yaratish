@@ -227,7 +227,9 @@ async def test_hayvonlar(msg: types.Message):
 
         elif soz == "mushuk":
             await msg.reply_photo(mushuk)
-
+        else:
+            await msg.reply("kechirasiz bunday hayvon turi meni royxatimda yo'q buning uchun uzur so'rayman va keyinchalik bu hayvon turini"
+                            "royxatimga qoshishga harakt qilamn ")
 
 
 
