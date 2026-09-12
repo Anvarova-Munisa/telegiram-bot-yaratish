@@ -8,8 +8,10 @@ from handlers.users.snov import rt as snov_router
 from config.settings import BOT_TOKEN
 from handlers.users.start import router as start_router
 from handlers.users.help import router as help_router
-# from handlers.users.test import router as test_router
+from handlers.users.hayvonlar import router as hayvonlar_router
+from handlers.users.test import router as test_router
 from handlers.groups.tekshirish import rt as tekshirish_router
+from handlers.users.info import router as info_router
 
 dp = Dispatcher()
 
@@ -17,13 +19,14 @@ async def main() :
     bot = Bot(token=BOT_TOKEN,
               default=DefaultBotProperties(parse_mode=ParseMode.HTML)
               )
-    dp.include_router(test_router)
-    # dp.include_router(tekshirish_router)
-    dp.include_router(snov_router)
+
+    # dp.include_router(snov_router)
     dp.include_router(help_router)
     dp.include_router(start_router)
+    dp.include_router(info_router)
     # dp.include_router(test_router)
     # dp.include_router(tekshirish_router)
+    dp.include_router(hayvonlar_router)
 
     print("Bot ishga tushmoqda..")
     await dp.start_polling(bot)

@@ -1,15 +1,11 @@
 from aiogram import Router,types,filters
-
-
-
-
 router = Router()
-
 @router.message(filters.Command("start",prefix="%.+/-="))
 async def test(msg: types.Message):
     n = "Xush kelibsiz"
     n += " agar  yordam kerak bolsa /help tugmasini bosing"
     await msg.answer(n)
+    await msg.answer("Siz haqingizda Malumot olishimiz uchun /info ni bosing...")
 
 
 
