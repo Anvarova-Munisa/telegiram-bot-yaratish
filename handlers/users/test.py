@@ -100,20 +100,14 @@ async def get_forward_dict(msg: types.Message):
 
 
     dict_matni = json.dumps(forward_data, ensure_ascii=False, indent=2)
-
     await msg.answer(f"```json\n{dict_matni}\n```", parse_mode="MarkdownV2")
-
 guruhlar = []
-
-# 1. PIN qilingan xabarlarni tutish (Tepada turishi shart!)
 @router.message(F.pinned_message)
 async def pinned_handler(msg: types.Message):
     pinned = msg.pinned_message
     txt = pinned.text or pinned.caption or "Media xabar"
     user = msg.from_user.first_name if msg.from_user else "Admin"
     await msg.answer(f"📌 {user} \"{txt}\"ni qadadi")
-
-# 2. Faqat rasmlar/media guruhlar kelganda ishlash
 @router.message()
 async def media_handler(msg: types.Message):
     if msg.media_group_id:
@@ -137,17 +131,6 @@ async def reklma(msg: types.Message):
         await msg.delete()
     elif msg.caption_entities:
         await msg.delete()
-
-from aiogram import Router, types
-router = Router()
-@router.message()
-async def test(msg: types.Message):
-    if msg.caption:
-        await msg.answer("siz rasm va xabar yubordingiz")
-    elif msg.photo:
-        await msg.answer("siz rasm yubordingiz")
-    elif msg.video:
-        await msg.answer("siz yubordingiz")
 
 
 

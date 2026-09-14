@@ -3,6 +3,7 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
+from handlers.users import ovoz
 from handlers.users.test import router as test_router
 from handlers.users.snov import rt as snov_router
 from config.settings import BOT_TOKEN
@@ -12,6 +13,7 @@ from handlers.users.hayvonlar import router as hayvonlar_router
 from handlers.users.test import router as test_router
 from handlers.groups.tekshirish import rt as tekshirish_router
 from handlers.users.info import router as info_router
+from handlers.users.ovoz import router as ovoz_router
 
 dp = Dispatcher()
 
@@ -21,12 +23,13 @@ async def main() :
               )
 
     # dp.include_router(snov_router)
-    dp.include_router(help_router)
-    dp.include_router(start_router)
-    dp.include_router(info_router)
+    # dp.include_router(help_router)
+    # dp.include_router(start_router)
+    # dp.include_router(info_router)
     # dp.include_router(test_router)
     # dp.include_router(tekshirish_router)
-    dp.include_router(hayvonlar_router)
+    # dp.include_router(hayvonlar_router)
+    dp.include_router(ovoz_router)
 
     print("Bot ishga tushmoqda..")
     await dp.start_polling(bot)
