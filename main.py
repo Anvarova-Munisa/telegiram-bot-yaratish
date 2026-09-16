@@ -14,6 +14,8 @@ from handlers.users.test import router as test_router
 from handlers.groups.tekshirish import rt as tekshirish_router
 from handlers.users.info import router as info_router
 from handlers.users.ovoz import router as ovoz_router
+from handlers.users.car import router as car_router
+
 
 dp = Dispatcher()
 
@@ -23,13 +25,14 @@ async def main() :
               )
 
     # dp.include_router(snov_router)
-    # dp.include_router(help_router)
-    # dp.include_router(start_router)
+    dp.include_router(help_router)
+    dp.include_router(start_router)
     # dp.include_router(info_router)
     # dp.include_router(test_router)
     # dp.include_router(tekshirish_router)
     # dp.include_router(hayvonlar_router)
-    dp.include_router(ovoz_router)
+    # dp.include_router(ovoz_router)
+    dp.include_router(car_router)
 
     print("Bot ishga tushmoqda..")
     await dp.start_polling(bot)
