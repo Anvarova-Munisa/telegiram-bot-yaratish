@@ -4,5 +4,4 @@ class CarState(StatesGroup):
     type = State()
     car_name = State()
     color = State()
-    year = State()
     info = State()
