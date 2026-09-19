@@ -3,7 +3,8 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-from keyboard.repaykeyboard.carkeyboard import b_type, b_oddiy, b_inamarka, b_elektro
+from keyboard.repaykeyboard.carkeyboard import (b_type, b_oddiy, b_inamarka, b_elektro,b_rang)
+from keyboard.repaykeyboard.carkeyboard import ranglar
 from states.carstates import CarState
 
 router = Router()
@@ -30,7 +31,7 @@ async def car_type_chosen(msg: types.Message, state: FSMContext):
         await msg.answer("Iltimos, menyudan birini tanlang!")
         return
 
-    await msg.answer(f"{msg.text} mashinalardan birini tanlang", reply_markup=keyboard.as_markup())
+    await msg.answer(f"{msg.text} mashinalardan birini tanlang", reply_markup=keyboard.as_markup(resize_keyboard=True))
     await state.update_data(type=msg.text)
     await state.set_state(CarState.car_name)
 
@@ -38,22 +39,26 @@ async def car_type_chosen(msg: types.Message, state: FSMContext):
 @router.message(CarState.car_name)
 async def car_name_chosen(msg: types.Message, state: FSMContext):
     await state.update_data(car_name=msg.text)
-    await msg.answer("Mashina rangini kiriting:", reply_markup=types.ReplyKeyboardRemove())
+    await msg.answer("Mashina rangini kiriting:", reply_markup=b_rang.as_markup(resize_keyboard=True))
     await state.set_state(CarState.color)
 
 
 @router.message(CarState.color)
 async def car_color_chosen(msg: types.Message, state: FSMContext):
-    await state.update_data(color=msg.text)
+    if msg.text in ranglar:
+        await state.update_data(color=msg.text)
 
-    contact_kb = ReplyKeyboardBuilder()
-    contact_kb.button(text="📱 Telefon raqamni yuborish", request_contact=True)
-    contact_kb.adjust(1)
-
-    await msg.answer(
-        "Mashinani band qildingiz! Endi telefon raqamingizni yuboring:",
-        reply_markup=contact_kb.as_markup(resize_keyboard=True))
-    await state.set_state(CarState.info)
+        contact_kb = ReplyKeyboardBuilder()
+        contact_kb.button(text="📱 Telefon raqamni yuborish", request_contact=True)
+        contact_kb.adjust(1)
+        await msg.answer(
+            "Mashinani band qildingiz! Endi telefon raqamingizni yuboring:",
+            reply_markup=contact_kb.as_markup(resize_keyboard=True)
+        )
+        await state.set_state(CarState.info)
+    else:
+       await msg.answer("bunday rang mavjud emas")
+       await state.set_state(CarState.color)
 
 
 @router.message(CarState.info, F.contact)

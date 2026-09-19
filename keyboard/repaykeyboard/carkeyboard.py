@@ -23,3 +23,11 @@ cars = ["byd", "tesla", "kia", "tesla2", "tesla3"]
 for car in cars:
     b_elektro.button(text=car)
 b_elektro.adjust(3)
+
+
+
+b_rang = ReplyKeyboardBuilder()
+ranglar = ["oq", "qora", "qizil", "kok", "yashil"]
+for rang in ranglar:
+    b_rang.button(text=rang)
+b_rang.adjust(3)
